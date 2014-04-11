@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "E:\electronics\projects\psu\AVRpsu\src\asm\labels.tmp" -fI -W+ie -o "E:\electronics\projects\psu\AVRpsu\src\asm\AVRpsu.hex" -d "E:\electronics\projects\psu\AVRpsu\src\asm\AVRpsu.obj" -e "E:\electronics\projects\psu\AVRpsu\src\asm\AVRpsu.eep" -m "E:\electronics\projects\psu\AVRpsu\src\asm\AVRpsu.map" "E:\electronics\projects\psu\AVRpsu\src\asm\main.asm"

@@ -1,0 +1,12 @@
+EAGLE Version 4.03 Copyright (c) 1988-2001 CadSoft
+
+Electrical Rule Check for C:/PROGRAMFILER/EAGLE-4.03/projects/miniPSU/Main.sch at 04.04.2004 19:01:18 
+
+ERROR: OUTPUT and SUPPLY Pins mixed on net V-
+WARNING: Sheet 1/1: Nets N$53 and N$37 too close at (9 4.5)
+WARNING: Sheet 1/1, Net N$53: wire overlaps pin at (9 4.5)
+
+Board and schematic are consistent
+
+    1 error
+    2 warnings

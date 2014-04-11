@@ -1,0 +1,76 @@
+Part   Value      Device          Package      Description                         
++V_OUT            2,15/1,0        2,15/1,0     THROUGH-HOLE PAD                    
+0VAC              2,15/1,0        2,15/1,0     THROUGH-HOLE PAD                    
+0V_OUT            2,15/1,0        2,15/1,0     THROUGH-HOLE PAD                    
+12VAC             2,15/1,0        2,15/1,0     THROUGH-HOLE PAD                    
+24VAC             2,15/1,0        2,15/1,0     THROUGH-HOLE PAD                    
+B1     RBV2506    FB32            FB32         FAGOR RECTIFIER                     
+B2     DB154G     B-DIL           B-DIL        RECTIFIER                           
+C1     1000uF 50V CPOL-EUE7.5-16  E7,5-16      POLARIZED CAPACITOR, European symbol
+C2                CPOL-EUE7.5-16  E7,5-16      POLARIZED CAPACITOR, European symbol
+C3                CPOL-EUE7.5-16  E7,5-16      POLARIZED CAPACITOR, European symbol
+C4                CPOL-EUE7.5-16  E7,5-16      POLARIZED CAPACITOR, European symbol
+C5                CPOL-EUE7.5-16  E7,5-16      POLARIZED CAPACITOR, European symbol
+C6                CPOL-EUE7.5-16  E7,5-16      POLARIZED CAPACITOR, European symbol
+C7     0.1uF 100V C-EU102-043X133 C102-043X133 CAPACITOR, European symbol          
+C8     470pF      C-EUC0805       C0805        CAPACITOR, European symbol          
+C9     0.1uF      C-EUC2220       C2220        CAPACITOR, European symbol          
+C10    1000pF     C-EUC2220       C2220        CAPACITOR, European symbol          
+C11    1000pF     C-EUC2220       C2220        CAPACITOR, European symbol          
+C12    2200uF 25V CPOL-EUE5-13    E5-13        POLARIZED CAPACITOR, European symbol
+C13    10uF 50V   CPOL-EUE5-5     E5-5         POLARIZED CAPACITOR, European symbol
+C14    10uF 50V   CPOL-EUE5-5     E5-5         POLARIZED CAPACITOR, European symbol
+C15    10uF 50V   CPOL-EUE5-5     E5-5         POLARIZED CAPACITOR, European symbol
+D1     BAS32      DIODE-SOD80C    SOD80C       DIODE                               
+D2     BAS32      DIODE-SOD80C    SOD80C       DIODE                               
+D3     BAS32      DIODE-SOD80C    SOD80C       DIODE                               
+D4     BAS32      DIODE-SOD80C    SOD80C       DIODE                               
+D6     1N4148     1N4148          DO35-10      DIODE                               
+IC1    LM6144     4AMP_P4+11D     SO14         OP AMP                              
+IC2               LM317TS         317TS        VOLTAGE REGULATOR                   
+IC3    ICL7662CPA ICL7660CPA      DIL08        VOLTAGE CONVERTER                   
+J1                MTA08-100       10X08MTA     AMP CONNECTOR                       
+J2                MTA02-100       10X02MTA     AMP CONNECTOR                       
+R1     18k        R-EU_R1206      R1206        RESISTOR, European symbol           
+R2     1k         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R3     1R         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R4     1R         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R5     1R         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R6     1R         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R7     4.7k       R-EU_R1206      R1206        RESISTOR, European symbol           
+R8     3.3k       R-EU_R1206      R1206        RESISTOR, European symbol           
+R9     1k         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R10    10k        R-EU_R1206      R1206        RESISTOR, European symbol           
+R11    1k         R-EU_R1206      R1206        RESISTOR, European symbol           
+R12    1k         R-EU_R1206      R1206        RESISTOR, European symbol           
+R13    18k        R-EU_R1206      R1206        RESISTOR, European symbol           
+R14    10k        R-EU_R1206      R1206        RESISTOR, European symbol           
+R15    2k         R-EU_R1206      R1206        RESISTOR, European symbol           
+R16    1k         R-EU_R1206      R1206        RESISTOR, European symbol           
+R17    1.8k       R-EU_R1206      R1206        RESISTOR, European symbol           
+R18    10k        R-EU_R1206      R1206        RESISTOR, European symbol           
+R19    2k         R-EU_R1206      R1206        RESISTOR, European symbol           
+R20    3.3k       R-EU_R1206      R1206        RESISTOR, European symbol           
+R21    4.7k       R-EU_R1206      R1206        RESISTOR, European symbol           
+R22               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R23               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R24               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R25               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R26               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R27               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R28               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R29               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R30               R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R31    1R         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R32    240R       R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R33    680R       R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R34    100R       B64W            B64W         POTENTIOMETER                       
+R35    100R       R-EU_0207/10    0207/10      RESISTOR, European symbol           
+R36    1k         R-EU_0207/10    0207/10      RESISTOR, European symbol           
+RL1    G2R        G2R             G2R          RELAY                               
+T1     TIP146     TIP146          TO218AV      PNP DARLINGTON TRANSISTOR           
+T2     TIP146     TIP146          TO218AV      PNP DARLINGTON TRANSISTOR           
+T3     BC847      BC847           SOT23        NPN TRANSISTOR                      
+T4     BC847      BC847           SOT23        NPN TRANSISTOR                      
+T5     BC847      BC847           SOT23        NPN TRANSISTOR                      
+T6     BC639      BC639           TO92         NPN TRANSISTOR                      

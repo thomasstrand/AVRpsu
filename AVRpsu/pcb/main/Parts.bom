@@ -1,0 +1,73 @@
+Partlist exported from C:/PROGRAMFILER/EAGLE-4.03/projects/miniPSU/Main.sch at 23.02.2004 21:29:09 
+
+Part   Value        Device            Package      Description                                   
+D1     1N4004       1N4004            DO41-10      DIODE                               
+D2     8V2          ZENER-DIODESOD80C SOD80C       Z-Diode                             
+D3     BAS32        DIODE-SOD80C      SOD80C       DIODE                               
+D4     BAS32        DIODE-SOD80C      SOD80C       DIODE                               
+D5     BAS32        DIODE-SOD80C      SOD80C       DIODE                               
+D6     BAS32        DIODE-SOD80C      SOD80C       DIODE                               
+IC1    LM317T       LM317TS           317TS        VOLTAGE REGULATOR                   
+IC2    TL074        4AMP_P4+11D       SO14         OP AMP                              
+IC3    7812         78XXL             78XXL        VOLTAGE REGULATOR                   
+IC4    ICL7662CPA   ICL7660CPA        DIL08        VOLTAGE CONVERTER                   
+J1                  MTA03-100         10X03MTA     AMP CONNECTOR                       
+J2                  MTA03-100         10X03MTA     AMP CONNECTOR                       
+J3                  MTA06-100         10X06MTA     AMP CONNECTOR                       
+J4                  MTA06-100         10X06MTA     AMP CONNECTOR                       
+J5                  MTA02-100         10X02MTA     AMP CONNECTOR                       
+R1     240R         R-EU_M0805        M0805        RESISTOR, European symbol           
+R2     1R           R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R3     1R           R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R4     1R           R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R5     1R           R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R6     680R         R-EU_R0805        R0805        RESISTOR, European symbol           
+R7     1k 2W        R-EU_0414/15      0414/15      RESISTOR, European symbol           
+R8     100R         B64Y              B64Y         POTENTIOMETER                       
+R9     220R         R-EU_R0805        R0805        RESISTOR, European symbol           
+R10    1k           R-EU_R0805        R0805        RESISTOR, European symbol           
+R11    1k           R-EU_R0805        R0805        RESISTOR, European symbol           
+R12    47k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R13    4.7k         R-EU_R0805        R0805        RESISTOR, European symbol           
+R14    2.2k         R-EU_R0805        R0805        RESISTOR, European symbol           
+R15    33k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R16    3.3k         R-EU_R0805        R0805        RESISTOR, European symbol           
+R17    10k          R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R18    10k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R19    10k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R20                 R-EU_R0805        R0805        RESISTOR, European symbol           
+R21    10k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R22    10k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R23    3k           R-EU_R0805        R0805        RESISTOR, European symbol           
+R24    12k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R25    12k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R26    3k           R-EU_R0805        R0805        RESISTOR, European symbol           
+R27    20k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R28    1k           R-EU_R0805        R0805        RESISTOR, European symbol           
+R29    1k           R-EU_R0805        R0805        RESISTOR, European symbol           
+R30    20k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R31    2k           R-EU_R0805        R0805        RESISTOR, European symbol           
+R32    20k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R33    10k          R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R34    10k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R35    10k          R-EU_R0805        R0805        RESISTOR, European symbol           
+R36    100R         23B               23B          POTENTIOMETER                       
+R37    22R          R-EU_R0805        R0805        RESISTOR, European symbol           
+R38    22R          R-EU_R0805        R0805        RESISTOR, European symbol           
+R39    100R         23B               23B          POTENTIOMETER                       
+R40    1R           R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R41                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R42                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R43                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R44                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R45                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R46                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R47                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R48                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+R49                 R-EU_0207/10      0207/10      RESISTOR, European symbol           
+RL1    G2R          G2R               G2R          RELAY                               
+T1     TIP146       TIP146            TO218AV      PNP DARLINGTON TRANSISTOR           
+T2     TIP146       TIP146            TO218AV      PNP DARLINGTON TRANSISTOR           
+T3     BC639        BC639             TO92         NPN TRANSISTOR                      
+T4     BC847        BC847             SOT23        NPN TRANSISTOR                      
+T5     BC639        BC639             TO92         NPN TRANSISTOR                      

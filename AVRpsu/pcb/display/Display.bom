@@ -1,0 +1,49 @@
+Partlist exported from C:/PROGRAMFILER/EAGLE-4.03/projects/miniPSU/Display.sch at 15.03.2003 17:50:08 
+
+Part    Value      Device     Package  Description                      
++5V     SMD        SMD        SMD      SOLDER PAD                       
+C1      0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C2      0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C3      0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C4      0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C5      0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C6      0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C7      10uF 6V    C-EUC3216  C3216    CAPACITOR, European symbol       
+C8      10uF 6V    C-EUC3216  C3216    CAPACITOR, European symbol       
+C9      12pF       C-EUC0805  C0805    CAPACITOR, European symbol       
+C10     12pF       C-EUC0805  C0805    CAPACITOR, European symbol       
+C11     0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C12     0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C13     0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C14     0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C15     0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+C16     0.1uF      C-EUC0805  C0805    CAPACITOR, European symbol       
+CV      SMD        SMD        SMD      SOLDER PAD                       
+C_READ  SMD        SMD        SMD      SOLDER PAD                       
+C_SET   SMD        SMD        SMD      SOLDER PAD                       
+GND     SMD        SMD        SMD      SOLDER PAD                       
+IC1     MEGA8-AC   MEGA8-AC   TQFP32   MICROCONTROLLER                  
+IC2     74HC164D   74HC164D   SO14     8-bit parallel out SHIFT REGISTER
+IC3     MAX202CSE  MAX202CSE  SO16     RS-232 TRANCEIVER                
+J1      16x1 LCD   1X16_01    1X16_254 Pad connectors                   
+L1      100uH      L-EULQH4N  LQH4N    INDUCTOR, European symbol        
+OFF     SMD        SMD        SMD      SOLDER PAD                       
+Q1      11.0592MHz SM49       SM49     CRYSTAL                          
+R1      10k        R-EU_R0805 R0805    RESISTOR, European symbol        
+R2      10k        R-EU_R0805 R0805    RESISTOR, European symbol        
+R3      10k        R-EU_R0805 R0805    RESISTOR, European symbol        
+R4      1k         R-EU_R0805 R0805    RESISTOR, European symbol        
+R5      1k         R-EU_R0805 R0805    RESISTOR, European symbol        
+R6      1k         23B        23B      POTENTIOMETER                    
+R7      3.3k       R-EU_R0805 R0805    RESISTOR, European symbol        
+R8      9.1R       R-EU_R0805 R0805    RESISTOR, European symbol        
+R10     10k        R-EU_R0805 R0805    RESISTOR, European symbol        
+RELAY   SMD        SMD        SMD      SOLDER PAD                       
+S1                 HH         HH       SWITCH                           
+S2      EC16B      EC16B      EC16B    ROTARY ENCODER                   
+S3                 HH         HH       SWITCH                           
+SER_IN  SMD        SMD        SMD      SOLDER PAD                       
+SER_OUT SMD        SMD        SMD      SOLDER PAD                       
+SV1     ISP        MA03-2     MA03-2   PIN HEADER                       
+V_READ  SMD        SMD        SMD      SOLDER PAD                       
+V_SET   SMD        SMD        SMD      SOLDER PAD                       

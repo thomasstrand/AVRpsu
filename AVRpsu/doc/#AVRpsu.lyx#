@@ -1,0 +1,2777 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass book
+\begin_preamble
+\date{}
+\usepackage{multirow}
+\end_preamble
+\language english
+\inputencoding default
+\fontscheme palatino
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 2
+\paragraph_separation skip
+\defskip medskip
+\quotes_language swedish
+\quotes_times 2
+\papercolumns 1
+\papersides 2
+\paperpagestyle fancy
+
+\layout Title
+
+
+\size giant 
+AVRpsu
+\newline 
+
+\size default 
+
+\begin_inset Graphics
+	filename E:/Docs/Electronics/Projects/psu/AVRpsu/pics/edited/ekstern_copy.jpg
+	lyxscale 30
+	scale 70
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Author
+
+Microcontroller Based Laboratory Power supply
+\layout Standard
+\added_space_top vfill* 
+Written with LyX in April - May 2004 by Thomas Strand.
+\layout Standard
+
+
+\begin_inset LatexCommand \tableofcontents{}
+
+\end_inset 
+
+
+\layout Chapter
+
+Introduction
+\layout Standard
+\align left 
+Any engineer, technician or hobbyist need some form of power supply when
+ designing or experimenting with electronic circuits.
+ The power supply described here will cover a broad range of applications,
+ including battery charging.
+ AVRpsu is a laboratory power supply with a single output of 0-25V, 0-2.5A.
+ Output voltage and current limit are adjustable from the front panel controls
+ or remotely through the RS-232 port, with resolutions of 100mV and 10mA.
+ The design is entirely linear, resulting in lower noise than switched designs.
+ A very compact size is achieved through use of a highly integrated microcontrol
+ler, the Atmel ATmega8.
+ It eliminates the need for external devices such as A/D- and D/A-converters,
+ memories, clock circuits or any glue logic.
+ This saves on design time, cost and space.
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename pics/edited/intern_copy.jpg
+	lyxscale 30
+	scale 60
+	keepAspectRatio
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Chapter
+
+Operation
+\layout Section
+
+Overview
+\layout Standard
+
+AVRpsu may be operated either from the RS-232 port or from the front panel.
+ The front panel consists of an alphanumeric display, two buttons, a rotary
+ encoder and a pair of output terminals.
+ The two buttons are labeled SET and OUTPUT, and are used for selecting
+ which parameter to adjust and switching the output on or off, respectively.
+ A rotary encoder is used for adjusting parameters.
+ This simple scheme makes operation intuitive, eliminating the need for
+ an in-depth study of the manual before using the unit.
+\layout Standard
+
+The OUTPUT key is very convenient for switching off the power while doing
+ modifications to the project at work.
+\layout Standard
+
+Pressing and holding either of the buttons has special functions.
+\layout Standard
+
+For operation from the RS-232 port, see section 
+\begin_inset LatexCommand \ref{sec:RS-232-Port}
+
+\end_inset 
+
+.
+\layout Section
+\pagebreak_top 
+Adjusting Parameters
+\layout Standard
+
+Parameters are adjusted from a set of menus, which are entered by pressing/holdi
+ng the keys.
+ The menu structure is illustrated in Figure 
+\begin_inset LatexCommand \ref{fig:menu}
+
+\end_inset 
+
+ and is explained in detail in the following sections.
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename E:/Docs/Electronics/Projects/psu/AVRpsu/figures/Flowchart.gif
+	lyxscale 20
+	display monochrome
+	scale 10
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:menu}
+
+\end_inset 
+
+AVRpsu menu structure.
+\end_inset 
+
+
+\layout Subsection
+
+Adjusting Voltage and Current
+\layout Standard
+
+From 
+\emph on 
+Normal
+\emph default 
+ mode, a short press on SET will enter the 
+\emph on 
+Set Volt
+\emph default 
+ mode.
+ Every succeeding short press will advance to the next mode in the list.
+\layout List
+\labelwidthstring MMMMMMM
+
+
+\emph on 
+Set\SpecialChar ~
+Volt:
+\emph default 
+ Voltage digits are flashing and the voltage setpoint can be adjusted with
+ the rotary encoder.
+\begin_deeper 
+\layout Standard
+
+If no adjustement is made for about 20 seconds, AVRpsu returns to 
+\emph on 
+Normal
+\emph default 
+ mode, leaving parameters in EEPROM unchanged.
+ This is true even if parameters are adjusted from the RS-232 port.
+\end_deeper 
+\layout List
+\labelwidthstring MMMMMMM
+
+
+\emph on 
+Set\SpecialChar ~
+Ampere:
+\emph default 
+ Ampere digits are flashing and the current limit can be adjusted with the
+ rotary encoder.
+\begin_deeper 
+\layout Standard
+
+If no adjustement is made for about 20 seconds, AVRpsu returns to 
+\emph on 
+Normal
+\emph default 
+ mode, leaving parameters in EEPROM unchanged.
+ This is true even if parameters are adjusted from the RS-232 port.
+\end_deeper 
+\layout List
+\labelwidthstring MMMMMMM
+
+
+\emph on 
+Normal: 
+\emph default 
+Return to 
+\emph on 
+Normal
+\emph default 
+ mode.
+ The voltage and current setpoints are saved to EEPROM, and the cycle is
+ repeated.
+\layout Subsection
+
+Switching the Output On or Off
+\layout Standard
+
+The output can be toggled on or off with a short press on OUTPUT in any
+ of the modes 
+\emph on 
+Normal, Set Volt 
+\emph default 
+or
+\emph on 
+ Set Ampere
+\emph default 
+.
+ When the output is off, 
+\begin_inset Quotes sld
+\end_inset 
+
+OFF
+\begin_inset Quotes srd
+\end_inset 
+
+ appears in the output mode field of the display (see section 
+\begin_inset LatexCommand \ref{sec:out_mode}
+
+\end_inset 
+
+).
+\layout Subsection
+
+Adjusting Baudrate and Fan trip points
+\layout Standard
+
+From 
+\emph on 
+Normal
+\emph default 
+ mode, press and hold SET to enter the 
+\emph on 
+Set Baudrate
+\emph default 
+ mode.
+ Every succeeding short press will advance to the next mode in the list.
+\layout Standard
+
+To exit to 
+\emph on 
+Normal
+\emph default 
+ mode again, press and hold SET.
+ The Baudrate and the Fan trip points are saved to EEPROM.
+\layout List
+\labelwidthstring MMMMMMM
+
+
+\emph on 
+Set\SpecialChar ~
+Baudrate:
+\emph default 
+ The Baudrate is flashing and can be adjusted with the rotary encoder.
+ 
+\begin_deeper 
+\layout Standard
+
+Ten Baudrates are available: 300, 600, 1200, 2400, 4800, 9600, 19200, 38400,
+ 57600 and 115200 bps.
+\layout Standard
+
+The frame format is fixed to 8 data bits, no parity and one stop bit.
+\layout Standard
+
+If no adjustement is made for about 20 seconds, AVRpsu returns to 
+\emph on 
+Normal
+\emph default 
+ mode, leaving parameters in EEPROM unchanged.
+ This is true even if parameters are adjusted from the RS-232 port.
+\end_deeper 
+\layout List
+\labelwidthstring MMMMMMM
+
+
+\emph on 
+Set\SpecialChar ~
+Fan\SpecialChar ~
+Start:
+\emph default 
+ The Fan Start Temperature is flashing and can be adjusted with the rotary
+ encoder.
+\begin_deeper 
+\layout Standard
+
+It can be adjusted in the following range: 
+\begin_inset Formula $Fan\, Stop+1\Longrightarrow80$
+\end_inset 
+
+
+\layout Standard
+
+If no adjustement is made for about 20 seconds, AVRpsu returns to 
+\emph on 
+Normal
+\emph default 
+ mode, leaving parameters in EEPROM unchanged.
+ This is true even if parameters are adjusted from the RS-232 port.
+\end_deeper 
+\layout List
+\labelwidthstring MMMMMMM
+
+
+\emph on 
+Set\SpecialChar ~
+Fan\SpecialChar ~
+Stop:
+\emph default 
+ The Fan Stop Temperature is flashing and can be adjusted with the rotary
+ encoder.
+\begin_deeper 
+\layout Standard
+
+It can be adjusted in the following range: 
+\begin_inset Formula $30\Longrightarrow Fan\, Start-1$
+\end_inset 
+
+
+\layout Standard
+
+If no adjustement is made for about 20 seconds, AVRpsu returns to 
+\emph on 
+Normal
+\emph default 
+ mode, leaving parameters in EEPROM unchanged.
+ This is true even if parameters are adjusted from the RS-232 port.
+\end_deeper 
+\layout List
+\labelwidthstring MMMMMMM
+
+
+\emph on 
+Set\SpecialChar ~
+Baudrate: 
+\emph default 
+Return to 
+\emph on 
+Set Baudrate
+\emph default 
+ mode, and the cycle is repeated.
+\layout Subsection
+\pagebreak_top 
+Viewing Output Power and Heatsink Temperature
+\layout Standard
+
+This mode enables the user to see the power consumption of the load and
+ the measured temperature at the heatsink.
+\layout Standard
+
+
+\emph on 
+View Power
+\emph default 
+ mode is entered by pressing and holding OUTPUT.
+ The power delivered to the load and the heatsink temperature are displayed.
+ Please note the following:
+\layout Itemize
+
+This mode can only be entered from 
+\emph on 
+Normal
+\emph default 
+ mode.
+\layout Itemize
+
+No parameters can be adjusted in this mode.
+\layout Itemize
+
+Short presses on OUTPUT have no effect in this mode, implying the output
+ can not be switched on or off in this mode.
+\layout Standard
+
+To exit to 
+\emph on 
+Normal
+\emph default 
+ mode, press and hold OUTPUT.
+\layout Subsection
+
+Display
+\layout Standard
+
+
+\begin_inset Wrap figure
+width "50col%"
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/ModeTable.gif
+	lyxscale 25
+	scale 15
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:display}
+
+\end_inset 
+
+Display modes.
+\end_inset 
+
+
+\layout Standard
+
+The display is a LED backlit, 16 characters 
+\begin_inset Formula $\times$
+\end_inset 
+
+1 line alphanumeric LCD module (Seiko L1671B1J).
+ It has a built-in ASCII translator table, and eight user-definable characters.
+\layout Standard
+
+The alphanumeric format is more flexible than traditional seven-segment
+ types, allowing all sorts of text and icons to be displayed.
+ This makes menu-based configuration easier to implement, and simplifies
+ adding features.
+\layout Standard
+
+Different parameters are displayed according to the selected mode, as shown
+ in Figure 
+\begin_inset LatexCommand \ref{fig:display}
+
+\end_inset 
+
+.
+\layout Standard
+
+Flashing parameters can be adjusted by turning the rotary encoder.
+ Adjusting a parameter will cause the flashing to stop for a few seconds,
+ to simplify reading the parameter.
+\layout Standard
+
+
+\begin_inset LatexCommand \label{sec:out_mode}
+
+\end_inset 
+
+In the modes 
+\emph on 
+Normal, Set Volt
+\emph default 
+ and 
+\emph on 
+Set Ampere
+\emph default 
+, output mode is shown in the center of the display.
+ output mode lets the user know whether the voltage or the current is being
+ regulated (held constant), or if the output has been switched off.
+ Normally, 
+\emph on 
+Constant Voltage
+\emph default 
+ (CV) is the preferred mode and 
+\emph on 
+Constant Current
+\emph default 
+ (CC) means the circuit draws more current than expected.
+ This is, however, not always the case.
+ When charging NiCd batteries, for example, 
+\emph on 
+Constant Current
+\emph default 
+ is the appropriate mode.
+\layout Standard
+
+
+\emph on 
+Output Mode
+\emph default 
+ is one of the following:
+\layout List
+\labelwidthstring 00.00.0000
+
+CV Constant Voltage
+\layout List
+\labelwidthstring 00.00.0000
+
+CC Constant Current
+\layout List
+\labelwidthstring 00.00.0000
+
+OFF Output has been switched off
+\layout Section
+
+Parameter Storage
+\layout Standard
+
+All parameters are saved in non-volatile memory (EEPROM) and restored at
+ power-up.
+ This makes it convenient to continue working after the power has been switched
+ off, eliminating the need for re-adjusting parameters.
+ One exception is the output state, which is always off at power-up, to
+ prevent accidental destruction of connected equipment.
+\layout Standard
+
+Parameters are saved on two occasions:
+\layout Itemize
+
+When in 
+\emph on 
+Set Ampere
+\emph default 
+ mode and pressing SET for a short time.
+ AVRpsu will return to 
+\emph on 
+Normal
+\emph default 
+ mode and voltage and current limit setpoints are saved to EEPROM.
+\layout Itemize
+
+When in 
+\emph on 
+Set Baudrate, Set Fan 
+\emph default 
+Start or Set
+\emph on 
+ Fan Stop
+\emph default 
+ mode and pressing and holding SET.
+ AVRpsu will return 
+\emph on 
+to Normal 
+\emph default 
+mode and Baudrate and Fan trip points are saved to EEPROM.
+\layout Standard
+
+Parameters received through the RS-232 port will not overwrite those stored
+ in EEPROM.
+\layout Section
+
+
+\begin_inset LatexCommand \label{sec:RS-232-Port}
+
+\end_inset 
+
+RS-232 Port
+\layout Standard
+
+The RS-232 port can be used for remote control of the AVRpsu, including
+ readback of measured values.
+ The port is always activated and will always respond to received commands.
+ The available commands are shown in table 
+\begin_inset LatexCommand \ref{tab:RS-232}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float table
+placement h
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{tab:RS-232}
+
+\end_inset 
+
+RS-232 port commands
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="10" columns="5">
+<features>
+<column alignment="left" valignment="center" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+multirow{2}{10mm}{
+\end_inset 
+
+Command
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell multicolumn="1" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Host writes
+\end_inset 
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Host reads
+\end_inset 
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ID
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Data
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Data
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Set Volt
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+V
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+dd
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+13d
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Set Ampere
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+A
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+dd
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+13d
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Read Volt
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+v
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+dd
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Read Ampere
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+a
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+dd
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Read Temperature
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+t
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+dd
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Output on
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+O
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+13d
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Output off
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+o
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+13d
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Read Output State
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Quotes sld
+\end_inset 
+
+s
+\begin_inset Quotes srd
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+dd
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+Unsupported commands are replied with a "?".
+ 
+\layout Standard
+
+Data values "dd" for different parameters are as follows:
+\layout List
+\labelwidthstring MMMMMMMM
+
+Voltage: Decimal numbers in the range 0 - 250 representing 0 - 25.0V.
+ This applies for both reading and writing, and illegal values are ignored
+ and replied with a "?".
+\layout List
+\labelwidthstring MMMMMMMM
+
+Ampere: Decimal numbers in the range 0 - 250 representing 0 - 2.50A.
+ This applies for both reading and writing, and illegal values are ignored
+ and replied with a "?".
+\layout List
+\labelwidthstring MMMMMMMM
+
+Temperature: Decimal numbers in the range 0 - 255 representing 0 - 127.5
+ degrees C.
+ The LSB of the data byte represents 0.5 degrees and the remaining seven
+ bits represents 0 - 127 degrees C.
+\layout List
+\labelwidthstring MMMMMMMM
+
+Output\SpecialChar ~
+State: One of the following characters:
+\begin_deeper 
+\layout List
+\labelwidthstring 00.00.0000
+
+'O': Off
+\layout List
+\labelwidthstring 00.00.0000
+
+'V': Constant Voltage (CV)
+\layout List
+\labelwidthstring 00.00.0000
+
+'C': Constant Current (CC)
+\end_deeper 
+\layout Standard
+
+When a valid command and parameter has been received through the RS-232
+ port, 
+\emph on 
+Normal 
+\emph default 
+mode will be entered.
+ An icon will appear in the display, at the left side of the
+\emph on 
+ 
+\emph default 
+output mode field.
+ This indicates one or more parameters has been altered since the last setting
+ from the front panel.
+ The icon will be cleared when a parameter is adjusted from the front panel.
+\layout Section
+
+
+\begin_inset LatexCommand \label{sec:Firmware-Upgrade}
+
+\end_inset 
+
+Firmware Upgrade
+\layout Standard
+
+The internal firmware of the AVRpsu can be upgraded through the RS-232 port.
+ This is possible due to the boot loader support of the Atmega8, a feature
+ enabling it to reprogram its own program memory.
+ 
+\layout Standard
+
+The program memory (Flash) and EEPROM memories can be read and written through
+ the RS-232 port, but no provisions are made for reading or writing Fuse
+ Bits.
+ This is done in order to prevent the user from rendering AVRpsu unusable
+ by programming a Fuse Bit combination that do not work.
+ One example of this is selecting a clock configuration that does not comply
+ with the actual clock in AVRpsu.
+\layout Standard
+\pagebreak_top 
+Two requirements must be met to be able to upgrade the firmware:
+\layout Itemize
+
+Boot Loader Mode must be entered.
+\layout Itemize
+
+A PC with programming software must be available.
+\layout Standard
+
+Holding SET while powering up AVRpsu enters Boot Loader Mode.
+ The display reads "Boot Loader Mode".
+\layout Standard
+
+The programming software must be compliant with Atmel Application Note AVR109.
+ AVRpsu was designed and tested with AVRprog, but other compatible programs
+ are available and should work, though they are not tested.
+\layout Standard
+
+The firmware can now be upgraded with the programming software.
+ The display will not change during the firmware upgrade.
+ When the upgrade is finished, power-cycle AVRpsu and it is ready for use
+ with the new firmware.
+\layout Standard
+
+It is not possible to damage the Boot Loader by upgrading the firmware,
+ implying the Boot Loader can not overwrite itself.
+\layout Chapter
+
+Technical Description
+\layout Section
+
+Overview
+\layout Standard
+
+AVRpsu is a fairly conventional design, with a few exceptions.
+ The traditional potentiometers for adjusting voltage and current limit
+ are replaced by a microcontroller, which generates two analogue voltages
+ in place of the potentiometers.
+ The microcontroller also takes care of measuring the voltage and current
+ at the output, as well as controlling the relay in the Raw Power Supply,
+ measuring the temperature at the heatsink, and controlling the cooling
+ fans.
+ In addition to all this it provides a RS-232 port, which can be used for
+ remote control of the unit.
+ Figure 
+\begin_inset LatexCommand \ref{fig:block_diagram}
+
+\end_inset 
+
+ shows the AVRpsu block diagram.
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/Block_diagram.gif
+	lyxscale 25
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:block_diagram}
+
+\end_inset 
+
+AVRpsu block diagram.
+\end_inset 
+
+
+\layout Section
+
+Analogue Circuit
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{fig:main_sch}
+
+\end_inset 
+
+ shows the schematic for the main board, containing all the analogue circuits.
+ It is followed by a detailed description for each main portion of the circuit.
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/main_sch_small.bmp
+	lyxscale 20
+	scale 10
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:main_sch}
+
+\end_inset 
+
+The main board schematic reveals a straightforward design.
+\end_inset 
+
+
+\layout Subsection
+
+Raw Power Supply
+\layout Standard
+
+The Raw Power Supply provides the raw DC voltage to the Power Regulator
+ and consists of a mains transformer (not in schematic), relay (RL1), rectifier
+ (BR1) and reservoir capacitor (C4).
+ This voltage contains a fairly large amount of ripple, but the Power Regulator
+ suppresses this, so there is virtually no ripple voltage at the output.
+ The voltage is divided in two ranges in order to minimize power dissipation
+ in the output transistors.
+ A mains transformer with dual 12V secondaries connected in series provide
+ the two voltage ranges.
+ A relay (RL1) switches between the two secondary voltages, resulting in
+ 12 or 24V AC to the rectifier.
+ The relay is in turn controlled by the microcontroller, operating it according
+ to the measured output voltage.
+\layout Standard
+
+Power dissipation is limited by the heatsink; the output transistors are
+ capable of dissipating all power that can be generated under any condition.
+ Due to this fact, the relay does not switch from 24V to 12V immediately
+ when the output voltage drops below the threshold, but does so after a
+ delay of a few seconds.
+ On the up-going slope, however, the relay operates immediately, in order
+ to track the setpoint voltage when the user is increasing the voltage.
+ This procedure ensures minimum wear and maximum life span to the relay.
+\layout Subsection
+
+Power Regulator
+\layout Standard
+
+The power regulator is a classic analogue circuit built from operational
+ amplifiers and transistors.
+ It regulates both voltage and current at the output terminals to limits
+ set by the user.
+ All regulation is done in this circuit; the microcontroller is not part
+ of the regulation loop.
+ The microcontroller only provides the setvalue signals for the regulator.
+ Scaled signals for measuring output voltage and current are also provided
+ by the regulator circuit.
+\layout Subsubsection
+
+Output Stage
+\layout Standard
+
+The output stage consists of Darlington transistors T1 and T2 with emitter
+ resistors R2 - R4 ensuring equal current distribution.
+ PNP transistors are selected because they enable the voltage drop to be
+ minimized.
+ The transistor pair obtains their base current from the constant current
+ source built from T4, D2, R14, D3, D4 and R9.
+ The current source draws about 3mA of base current for the output transistors,
+ which is sufficient to drive them into full conduction.
+ However, op-amps IC2A and IC2D interfere with the circuit, preventing it
+ from drawing the full 3mA.
+ The op-amps thereby form parts of the voltage and current regulator.
+\layout Standard
+
+If the output of one or both of these op-amps goes positive, the voltage
+ at T4's emitter will rise, the base current for T1 and T2 will decrease,
+ and the output voltage will decrease.
+ This will happen if the output voltage is higher than the setpoint voltage,
+ or if the output current is higher than the setpoint current.
+\layout Subsubsection
+
+Voltage Regulator
+\layout Standard
+
+IC2A compares the actual output voltage, VOLTAGE_READ, with the setpoint
+ voltage, VOLTAGE_SET.
+ If the actual voltage rise above the setpoint, the output of IC2A will
+ rise, the Emitter of T4 will rise, and the Base current for the output
+ transistors will decrease, counteracting the initial voltage rise.
+\layout Standard
+
+VOLTAGE_READ is a DC voltage in the range 0 - 5.12V.
+ It is the output voltage divided by 5, the voltage divider being formed
+ by R12, R15 and R32.
+\layout Standard
+
+VOLTAGE_SET is a filtered PWM signal generated by the microcontroller.
+\layout Standard
+
+The AD-converter signal is labeled VOLTAGE_READ in Figure 
+\begin_inset LatexCommand \ref{fig:main_sch}
+
+\end_inset 
+
+ and has its own voltage divider formed by R13, R16 and R31.
+ This is done in order to prevent erroneous voltage readings under some
+ conditions.
+ This occurs when the actual voltage is much lower than the setpoint voltage,
+ because the op-amp will not allow large voltage differences between its
+ inputs.
+ The voltage at the non-inverting input of IC2A will then not reflect the
+ output voltage, but will be pulled up by the inverting input of the op-amp.
+\layout Standard
+
+The lower end of R32 could have been connected to ground, but that would
+ have caused the voltage regulator not to compensate for the voltage drop
+ across the current sense resistor R40 - R49.
+ IC2B ensures that this voltage drop is compensated for by lowering the
+ lower end of R32 to a voltage more negative than ground.
+ This fools the voltage regulator to believe the output voltage is lower
+ than it actually is.
+ This portion of the circuit is borrowed from a design featured in the magazine
+ Allt om Elektronik (Swedish version of Elektor).
+\layout Subsubsection
+
+Current Regulator
+\layout Standard
+
+IC2D compares the actual output current, CURRENT_READ, with the setpoint
+ current, CURRENT_SET.
+ If the actual current rise above the setpoint, the output of IC2D will
+ rise, the Emitter of T4 will rise, and the Base current for the output
+ transistors will decrease, counteracting the initial current rise.
+\layout Standard
+
+The actual current, CURRENT_READ, is is simply the voltage across the 0.1
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ 6W current sense resistor (R40 - R49) multiplied by 20.
+ This results in a voltage in the range 0 - 5.12V representing 0 - 2.55A.
+ This signal is also fed to the AD-converter.
+\layout Standard
+
+The setpoint, CURRENT_SET, is a DC voltage in the range 0 - 5.12V, and is
+ a filtered PWM signal generated by the microcontroller.
+\layout Subsection
+
+Thermal Management
+\layout Standard
+
+A Dallas 18S20 temperature sensor connected to J2 and two fans connected
+ to J5 provide for thermal management.
+ The temperature sensor is fixed to the heatsink close to the output transistor
+ pair.
+ It has a 1-wire digital interface, occupying only one pin on the microcontrolle
+r.
+ The heatsink temperature is monitored continuously and the cooling fans
+ are controlled according to trip-points defined by the user.
+\layout Standard
+
+If the heatsink should reach unacceptable temperatures, an over-temperature
+ mode is entered.
+ In this mode the output is switched off, the fans are started and a message
+ scrolls through the display telling what has happened.
+ When the unit has cooled down, normal operating will be resumed.
+ The output will remain in the off state, however.
+\layout Subsection
+
+Auxiliary Circuits
+\layout Standard
+
+The rest of the main board schematics consist mainly of voltage regulators
+ and interconnections.
+ 
+\layout Standard
+
+IC1 is an adjustable voltage regulator, LM317, which provides the +5.12V
+ for the digital circuits.
+ This voltage is adjusted by the potentiometer R8, which thereby set the
+ gain of both voltage and current regulator loops.
+\layout Standard
+
+IC3 is a fixed voltage regulator, 7812, which provides +12V for the relay,
+ fans, op-amps and bias for the output transistors.
+\layout Standard
+
+IC4 is a voltage converter, which converts the +12V to -12V.
+ Used for the op-amps.
+\layout Standard
+
+T3 is the relay driver and T5 is the driver for the fans.
+\layout Standard
+
+R36 and R39 are the offset adjustment potentiometers for the current and
+ voltage regulators, respectively.
+\layout Section
+
+Digital Circuit
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{fig:display_sch}
+
+\end_inset 
+
+ shows the schematic for the display board, containing all digital circuitry.
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/disp_sch_small.bmp
+	lyxscale 20
+	scale 10
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:display_sch}
+
+\end_inset 
+
+Display board schematics.
+ Simplicity seems to be the rule here.
+\end_inset 
+
+
+\layout Standard
+
+R6 is the contrast adjustment potentiometer for the LCD module.
+\layout Standard
+
+D1 and D2 are LEDs for illuminating the front panel (not implemented on
+ the prototype).
+\layout Subsection
+
+Microcontroller
+\layout Standard
+
+IC1 is an Atmel ATmega8 and is the heart of the system, controlling it all.
+ Thanks to all its integrated peripherals, very few external components
+ are needed.
+\layout Standard
+
+Supply decoupling for the microcontroller is provided for by C2 and C18.
+ C2 is a Murata filter designed to filter supply lines of digital circuits.
+ It prevents switching noise from the microcontroller from entering any
+ analogue circuits.
+\layout Standard
+
+The ISP (In-System Programming) connector was used during development, for
+ loading the program into the microcontroller.
+ This is necessary the first time, as no Boot Loader is present when the
+ device is new.
+ The ISP is also necessary for programming Fuses and for experimenting with
+ the Boot Loader.
+\layout Subsubsection
+
+AD-Converter
+\layout Standard
+
+The internal 10-bit AD-converter has its own supply pin, AVCC, which is
+ connected to the +5V (actually 5.12V) through a LC-filter consisting of
+ L1 and C1.
+ This arrangement assures clean power to the sensitive circuitry of the
+ AD-converter.
+ The AD-converter is configured to use the AVCC as its reference voltage.
+ This implies a 5.12V input at the active analogue input will result in a
+ full-scale result.
+\layout Standard
+
+The AD-converter measures the voltage and current at the output, and displays
+ the values on the display.
+ The signals V_READ and C_READ (see Figure 
+\begin_inset LatexCommand \ref{fig:display_sch}
+
+\end_inset 
+
+) are fed to the AD-converter through separate low-pass filters formed by
+ R4, C4, R5 and C5.
+ Only 8 bits resolution is used in this design, using the eight most significant
+ bits from the AD-conversion result.
+ The next significant bit is used for rounding, however.
+ If the next significant bit is set, the result is rounded up, otherwise
+ not.
+ This method ensures correct rounding of the result, but the logic behind
+ it can be somewhat difficult to realize at first.
+ 
+\layout Standard
+
+Consider the following example: An AD-converter with a range of 0 - 100
+ is available but only the two most significant digits are used in the applicati
+on.
+ The range will then be 0 - 10, ignoring the least significant (rightmost)
+ digit.
+ The result will then be 01 for all "real" results in the range 10 - 19.
+ This means 1.9 is rounded down to 1, which is clearly wrong.
+ Now, if the last digit is taken into account this can be avoided.
+ Rounding the result up for all values of the last digit equal to or greater
+ than 5, will correct the result.
+ The same principle is employed in the AD-conversion routine in AVRpsu.
+\layout Subsubsection
+
+PWM
+\layout Standard
+
+Timer1 is used in PWM mode for generating the setvalue signals VOLTAGE_SET
+ and CURRENT_SET (see Figure 
+\begin_inset LatexCommand \ref{fig:main_sch}
+
+\end_inset 
+
+).
+ This timer has two PWM channels and these signals are fed to the power
+ regulator through separate RC-filters, resulting in two DC voltages.
+ These voltages are proportional to the values in their respective Output
+ Compare Registers, OCR1A and OCR1B.
+ This functionality realizes two DAC's with the lowest possible pin usage
+ and component count.
+ Since the signals are generated entirely in hardware, program flow is only
+ affected when altering the Output Compare Register values.
+\layout Standard
+
+One drawback is slow response in change of settings, a result of the time
+ constant in the RC-filters.
+\layout Subsubsection
+
+RS-232 Port
+\layout Standard
+
+The internal USART together with the external level converter (see Section
+ 
+\begin_inset LatexCommand \ref{sub:Level-Converter}
+
+\end_inset 
+
+) provides a RS-232 port, enabling settings to be adjusted from a computer,
+ and measurements to be fed to a computer.
+ It is used in the asynchronous mode, as per the RS-232 standard.
+\layout Standard
+
+The microcontroller's own program can also be updated through the serial
+ port, see section 
+\begin_inset LatexCommand \ref{sec:Firmware-Upgrade}
+
+\end_inset 
+
+.
+ This enables the advanced user to add features to the unit whenever desired.
+\layout Subsection
+
+Support Circuits
+\layout Subsubsection
+
+Display
+\layout Standard
+
+The display is a Seiko 16X1 LCD module with LED backlight and built-in controlle
+r (Samsung KS0066).
+ The alphanumeric format gives a flexible means of displaying information,
+ not limiting the displayable information to just voltage and current but
+ also serial port parameters, temperature etc.
+ LCD modules like this also cost less than a load of LED digits and a driver
+ circuit.
+ 
+\layout Standard
+
+The display module has an 8-bit parallel interface that is connected to
+ the microcontroller via a 74HC164 shift register (IC2) to save port pins.
+ The Read/Write signal is permanently connected to ground, as no reading
+ from the display is necessary.
+ It is common practice to read the display's Busy Flag after each command,
+ to make sure the module is ready before sending any data or command.
+ This is, however, not entirely necessary as long as the timing requirements
+ are met with good margin.
+\layout Subsubsection
+
+Keys
+\layout Standard
+
+OUTPUT (S1) and SET (S3) are connected directly to the microcontroller and
+ enable the user to switch the output on and off as well as entering menus
+ for adjusting parameters.
+ The microcontroller has selectable pull-up resistors for each pin, eliminating
+ the need for external resistors.
+\layout Subsubsection
+
+Rotary Encoder
+\layout Standard
+
+The Rotary encoder (S2) is connected directly to the microcontroller.
+ Again, internal pull-up resistors eliminate the need for external resistors.
+ The encoder has two mechanical switches, which give two electrical signals.
+ These two signals are 90 degrees offset, providing direction information.
+ This results in 4 electrical states, which are sequenced when rotating,
+ the order of sequencing determining the direction of rotation.
+ These states are stored in a 4-byte table in program memory and is used
+ for decoding the rotary encoder.
+ One 4-state cycle corresponds to two mechanical indents and 
+\begin_inset Formula $\frac{1}{12}$
+\end_inset 
+
+ revolution on the encoder.
+\layout Standard
+
+Initially the encoder pins are read and the index to the corresponding table
+ element is stored in a global variable called 
+\emph on 
+rot_prev
+\emph default 
+.
+ Next time around, the pins are read again, the index is found and compared
+ to the previously stored one.
+ If they match, no rotation has occurred, and the function returns 0.
+ If they are not equal, two 
+\emph on 
+if
+\emph default 
+ statements determine which direction the encoder has rotated, and the function
+ returns -1 or 1.
+\layout Standard
+
+Not all 4 transactions between states result in a decoded rotation step
+ because that would result in 2 digital steps per mechanical indent.
+ This is not desirable; so only two transactions per direction are selected
+ to result in decoded rotation.
+ This way the increment/decrement of the parameter matches the mechanical
+ indents of the rotary encoder.
+\layout Standard
+
+A simpler method is to wait for an edge on one of the signals, and then
+ check the level at the other signal to determine the direction.
+ This has one major drawback, however: The program will hang in that function
+ until the edge is detected.
+ That is not at all acceptable in all applications.
+\layout Subsubsection
+
+
+\begin_inset LatexCommand \label{sub:Level-Converter}
+
+\end_inset 
+
+Level Converter
+\layout Standard
+
+IC3 is a Maxim MAX202 and provides the level conversion for the RS-232 port.
+ This is an upgrade from the well-known MAX232, requiring just 100nF capacitors
+ for the charge pump voltage converter.
+ It converts the 0-5V signals at the microcontroller pins to 
+\begin_inset Formula $\pm$
+\end_inset 
+
+12V at the RS-232 port, in both directions.
+\layout Chapter
+
+Calibration
+\layout Standard
+
+Calibrating AVRpsu is a simple, but nevertheless important procedure.
+ There are three potentiometers to adjust, which is done in the following
+ manner:
+\layout Itemize
+
+Connect a digital multimeter, V range, to +5V and ground at J4.
+ Adjust R8 for a reading of 5.12V.
+ Turn R36 and R38 fully clockwise.
+\layout Itemize
+
+Set AVRpsu to 0.1V and 0.05A.
+ Connect a digital multimeter, mV range, to the output terminals.
+ Adjust R39 for a reading of 100.0mV.
+\layout Itemize
+
+Set AVRpsu to 1.0V and 0.01A.
+ Connect a digital multimeter, mA range, to the output terminals.
+ Adjust R36 for a reading of 10.00mA.
+\layout Itemize
+
+Set AVRpsu to 19.9V and 0.05A.
+ Check that the output voltage really is 19.9V, and readjust R8 if necessary.
+\layout Chapter
+
+Performance
+\layout Standard
+
+
+\begin_inset Wrap figure
+placement p
+width "65col%"
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/background_noise.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:back_noise}
+
+\end_inset 
+
+Background noise.
+\end_inset 
+
+
+\layout Standard
+
+This chapter contains measurements made on the AVRpsu prototype, with comments.
+ All measurements were made with an Agilent 54622D oscilloscope, with some
+ supplementing measurements made with a Kenwood CS-5130.
+ Most measurements were made in a noisy lab, as can be seen on Figure 
+\begin_inset LatexCommand \ref{fig:back_noise}
+
+\end_inset 
+
+.
+ This is the resulting scope screen with the probe tip connected to the
+ ground clip.
+ AVRpsu was set to 25.0V and 2.50A.
+\layout Standard
+
+All measurements involving low voltages show this noise superimposed on
+ the output voltage.
+ It is important to realize that this noise does not arise in the AVRpsu,
+ but rather in the environment where the measurements were made.
+\layout Section
+
+Summary
+\layout List
+\labelwidthstring MMMMMMMMMM
+
+Noise: 1.5mV
+\begin_inset Formula $_{\textrm{peak-peak}}$
+\end_inset 
+
+
+\layout List
+\labelwidthstring MMMMMMMMMM
+
+Ripple\SpecialChar ~
+voltage: 4.8mV
+\begin_inset Formula $_{\textrm{peak-peak}}$
+\end_inset 
+
+max
+\layout List
+\labelwidthstring MMMMMMMMMM
+
+Ripple\SpecialChar ~
+current: 13.6mA
+\begin_inset Formula $_{\textrm{peak-peak}}$
+\end_inset 
+
+max
+\layout List
+\labelwidthstring MMMMMMMMMM
+
+Output\SpecialChar ~
+resistance: 12.5m
+\begin_inset Formula $\Omega$
+\end_inset 
+
+
+\layout List
+\labelwidthstring MMMMMMMMMM
+
+Transient\SpecialChar ~
+response: 35
+\begin_inset Formula $\mu$
+\end_inset 
+
+s
+\layout Section
+\pagebreak_top 
+Noise
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 25.0V 2.50A
+\layout Standard
+
+Ideally, the output voltage is completely clean under all conditions.
+ In the real world, however, noise and ripple are superimposed on the wanted
+ voltage.
+ Noise is measured with no load connected.
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{fig:noise}
+
+\end_inset 
+
+ shows the noise on the output voltage with no load.
+\layout Standard
+
+
+\begin_inset Wrap figure
+placement p
+width "60col%"
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/noise_no_load_new.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:noise}
+
+\end_inset 
+
+Output voltage with noise.
+\end_inset 
+
+
+\layout Standard
+
+The output voltage resembles Figure 
+\begin_inset LatexCommand \ref{fig:back_noise}
+
+\end_inset 
+
+, implying that background noise is very present.
+ If the background noise on Figure 
+\begin_inset LatexCommand \ref{fig:back_noise}
+
+\end_inset 
+
+ is subtracted, it can be seen that the AVRpsu noise level is very low.
+\layout Standard
+
+This measurement was repeated in a different lab, with a Kenwood CS-5130
+ analogue scope.
+ That revealed about 1.5mV
+\begin_inset Formula $_{\textrm{pk-pk}}$
+\end_inset 
+
+ of noise and no spikes around 90kHz.
+\layout Section
+
+Ripple
+\layout Standard
+
+Ripple is variations in the output voltage and current and is caused by
+ the varying voltage across the reservoir capacitor.
+ These relatively large variations arise from the fact that the capacitor
+ is charged with pulses from the rectifier.
+\layout Subsection
+\pagebreak_top 
+Ripple Voltage
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 25.0V 2.50A
+\layout Standard
+
+Ripple Voltage is measured in Constant Voltage mode, with a load resistor
+ resulting in a current of 2.49A.
+ Figure 
+\begin_inset LatexCommand \ref{fig:ripple_v}
+
+\end_inset 
+
+ shows the output voltage under these conditions.
+\layout Standard
+
+
+\begin_inset Wrap figure
+placement p
+width "65col%"
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/ripple_voltage.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:ripple_v}
+
+\end_inset 
+
+Ripple voltage.
+\end_inset 
+
+
+\layout Standard
+
+Noise in the lab is again suspected to be significant.
+ A measurement made in a different lab with a Kenwood CS-5130 scope indicated
+ a ripple voltage of 4.8mV
+\begin_inset Formula $_{\textrm{pk-pk}}$
+\end_inset 
+
+ with very little high-frequency components.
+ It matched the darkest portion of the trace in Figure 
+\begin_inset LatexCommand \ref{fig:ripple_v}
+
+\end_inset 
+
+ very well.
+\layout Subsection
+\added_space_top 2cm 
+Ripple Current
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 25.0V 2.50A
+\layout Standard
+
+Ripple Current is measured as a voltage across a load resistor and calculated
+ using the following formula: 
+\begin_inset Formula $I_{ripple}=\frac{\Delta V}{R_{load}}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Wrap figure
+placement p
+width "65col%"
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/ripple_current_hi.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:ripple_c}
+
+\end_inset 
+
+Ripple current.
+\end_inset 
+
+
+\layout Standard
+
+The measurement is performed in Constant Current mode, with a load resistor
+ resulting in a voltage of 24.9V.
+\layout Standard
+
+According to Figure 
+\begin_inset LatexCommand \ref{fig:ripple_c}
+
+\end_inset 
+
+, the ripple current is 2.48mA RMS.
+ That is less than 0.1% of the total current, a totally acceptable figure.
+\layout Section
+\pagebreak_top 
+Output Switching
+\layout Standard
+
+The output voltage does not change instantaneously when pressing the OUTPUT
+ key.
+ This switching takes time, and the voltage changes in an exponential slope.
+ The slow response is a result of the method used for switching the output
+ off: writing zero to the PWM registers.
+ The delay comes from the low-pass RC-filters for the PWM signals.
+ This may cause problems when working on digital circuits, as they tend
+ to dislike slowly rising power supplies.
+\layout Subsection
+
+From OFF to ON
+\layout Standard
+
+
+\begin_inset Wrap figure
+width "60col%"
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/output_off_on.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:off_on}
+
+\end_inset 
+
+Switching from off to on.
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 25.0V 2.50A
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{fig:off_on}
+
+\end_inset 
+
+ shows the output voltage slope when switching from off to on.
+ The measurement is made with no load.
+\layout Standard
+
+The slope is slow, but there is no overshoot or any other misbehaviour at
+ all.
+\layout Subsection
+\added_space_top 2cm 
+From ON to OFF
+\layout Standard
+
+
+\begin_inset Wrap figure
+placement p
+width "60col%"
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/output_on_off.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:on_off}
+
+\end_inset 
+
+Switching from on to off.
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 25.0V 2.50A
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{fig:on_off}
+
+\end_inset 
+
+ shows the output voltage slope when switching from on to off.
+ The measurement is made with no load.
+\layout Standard
+
+Again, slow but orderly.
+\layout Section
+\pagebreak_top 
+Output Resistance
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 25.0V 2.50A
+\layout Standard
+
+Output Resistance is defined as the virtual resistance in series with the
+ output of the power supply.
+ This can be seen by the fact that the voltage is not constant for different
+ load currents.
+\layout Standard
+
+The output resistance is measured using the method illustrated in Figure
+ 
+\begin_inset LatexCommand \ref{fig:rout_setup}
+
+\end_inset 
+
+.
+ A load resistor is switched on and off by a function generator and a power
+ FET, causing the load to be stepped from zero to a known current at a fixed
+ frequency.
+ AVRpsu is in Constant Voltage mode throughout the measurement.
+\layout Standard
+
+The output resistance is calculated using the following formula:
+\layout Standard
+\align center 
+
+\begin_inset Formula $R_{out}=\frac{\Delta V}{\Delta I}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/Rout.gif
+	lyxscale 25
+	scale 8
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:rout_setup}
+
+\end_inset 
+
+Measuring output resistance.
+\end_inset 
+
+
+\layout Standard
+\noindent \align left 
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/rout.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig_rout}
+
+\end_inset 
+
+Output resistance.
+\end_inset 
+
+
+\layout Standard
+
+The settings and load resistor result in a current of 1.00A, and Figure 
+\begin_inset LatexCommand \ref{fig_rout}
+
+\end_inset 
+
+ shows a differential voltage of 12.5mV.
+ This equates to an output resistance of 12.5m
+\begin_inset Formula $\Omega$
+\end_inset 
+
+, which is a bit on the high side.
+\layout Section
+
+Transient Response
+\layout Standard
+
+Transient Response is defined as the time the power supply needs to get
+ back on track after a change in load.
+\layout Subsection
+
+Constant Voltage
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 10.0V 2.50A
+\layout Standard
+
+The measurement setup is the same as for output resistance measurement,
+ see Figure 
+\begin_inset LatexCommand \ref{fig:rout_setup}
+
+\end_inset 
+
+.
+ The only difference is the oscilloscope settings regarding timebase and
+ vertical amplifier.
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/transient_cv.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:trans_cv}
+
+\end_inset 
+
+Transient response.
+\end_inset 
+
+
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{fig:trans_cv}
+
+\end_inset 
+
+ shows the measured response, Channel 1 trace is the output voltage, AC
+ coupled.
+ The negative edge on the Channel 2 trace indicates the load being switched
+ on.
+ The load current then steps from zero to 1.00A.
+ The Transient Response time is about 35
+\begin_inset Formula $\mu$
+\end_inset 
+
+s.
+\layout Subsection
+\pagebreak_top 
+Constant Current
+\layout Standard
+
+
+\series bold 
+AVRpsu\SpecialChar ~
+settings:
+\series default 
+ 10.0V 0.75A
+\layout Standard
+
+In Constant Current mode, one resistor is permanently connected to the output,
+ while another is switched on and off with a power FET, see Figure 
+\begin_inset LatexCommand \ref{fig:trans_cc_setup}
+
+\end_inset 
+
+.
+ This way, the output current is changed from one level to another at a
+ fixed frequency.
+ AVRpsu is in Constant Current mode during both these phases.
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/transient_cc.gif
+	lyxscale 25
+	scale 8
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:trans_cc_setup}
+
+\end_inset 
+
+Measuring transient response in Constant Current mode.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/transient_cc_overview.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:trans_cc_over}
+
+\end_inset 
+
+Transient response overview.
+\end_inset 
+
+
+\layout Standard
+
+Figure 
+\begin_inset LatexCommand \ref{fig:trans_cc_over}
+
+\end_inset 
+
+ gives an overview of what is going on.
+ Channel 2 represents the extra load resistor being switched on and off
+ (low is on), while channel 1 shows the output voltage change, keeping the
+ total current constant.
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/scope_pics/transient_cc_negedge.tif
+	scale 40
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{fig:trans_cc_neg}
+
+\end_inset 
+
+Transient response negative edge detail.
+\end_inset 
+
+
+\layout Standard
+\pagebreak_top 
+Figure 
+\begin_inset LatexCommand \ref{fig:trans_cc_neg}
+
+\end_inset 
+
+ shows the details of the output slope when the current changes from a low
+ level to a high level.
+ This is the most interesting case, as it represents AVRpsu preventing the
+ load current from growing larger than the user-defined level.
+\layout Standard
+
+AVRpsu's current regulator is slow.
+ When the load resistance suddenly decreases, AVRpsu does not do anything
+ for about 3.3ms, and then it uses about 3ms to get back on track.
+\layout Chapter
+\start_of_appendix 
+Circuit Board Layouts
+\layout Section
+
+Main Board
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/main_place_small.bmp
+	lyxscale 10
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+Main board component placement.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/main_top_small.bmp
+	lyxscale 10
+	display monochrome
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+Main board top layer.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/main_bot_small.bmp
+	lyxscale 10
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+Main board bottom layer.
+\end_inset 
+
+
+\layout Section
+
+Display Board
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/disp_place_top_small.bmp
+	lyxscale 10
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+Display board top layer component placement.
+ Front view.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+placement th
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/disp_place_bot_small.bmp
+	lyxscale 10
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+Display board bottom layer component placement.
+ Front view.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/disp_top_small.bmp
+	lyxscale 10
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+Display board top layer.
+ Front view.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+placement h
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename figures/disp_bot_small.bmp
+	lyxscale 10
+	scale 20
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+Display board bottom layer.
+ Front view.
+\end_inset 
+
+
+\the_end

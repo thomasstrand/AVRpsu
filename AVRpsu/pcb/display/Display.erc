@@ -1,0 +1,18 @@
+EAGLE Version 4.03 Copyright (c) 1988-2001 CadSoft
+
+Electrical Rule Check for C:/PROGRAMFILER/EAGLE-4.03/projects/miniPSU/Display.sch at 30.04.2004 21:48:22 
+
+WARNING: Sheet 1/1: SUPPLY Pin V+ overwritten with V++
+WARNING: Sheet 1/1: SUPPLY Pin VCC overwritten with +5V
+WARNING: Sheet 1/1: POWER Pin IC1 VCC connected to N$19
+WARNING: Sheet 1/1: POWER Pin IC1 GND2 connected to GND
+WARNING: Sheet 1/1: POWER Pin IC1 GND1 connected to GND
+WARNING: Sheet 1/1: POWER Pin IC1 VCC1 connected to N$19
+WARNING: Sheet 1/1: POWER Pin IC3 VCC connected to +5V
+WARNING: Sheet 1/1: POWER Pin C2 2A connected to GND
+WARNING: Sheet 1/1: POWER Pin C2 2B connected to GND
+
+Board and schematic are consistent
+
+    0 errors
+    9 warnings

@@ -1,0 +1,542 @@
+AVRpsu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Microcontroller Based Laboratory Power supply
+
+
+
+Contents
+1 INTRODUCTION	3
+2 OPERATION	4
+2.1 OVERVIEW	4
+2.2 ADJUSTING PARAMETERS	4
+2.2.1 Adjusting Voltage and Current	5
+2.2.2 Adjusting Baudrate and Fan Trip-points	5
+2.2.3 Viewing Output Power and Heatsink Temperature	5
+2.2.4 Display	6
+2.3 PARAMETER STORAGE	7
+2.4 RS-232 PORT	7
+2.5 FIRMWARE UPGRADE	8
+3 TECHNICAL DESCRIPTION	9
+3.1 OVERVIEW	9
+3.2 ANALOGUE CIRCUIT	10
+3.2.1 Raw Power Supply	10
+3.2.2 Power Regulator	11
+3.2.3 Thermal Management	12
+3.2.4 Auxiliary Circuits	12
+3.3 DIGITAL CIRCUIT	13
+3.3.1 Microcontroller	13
+3.3.2 Support Circuits	15
+4 PERFORMANCE	16
+4.1 SUMMARY	16
+4.2 NOISE	16
+4.3 RIPPLE	17
+4.3.1 Ripple Voltage	17
+4.3.2 Ripple Current	17
+4.4 OUTPUT SWITCHING	18
+4.4.1 From OFF to ON	18
+4.4.2 From ON to OFF	18
+4.5 OUTPUT RESISTANCE	19
+4.6 TRANSIENT RESPONSE	20
+4.6.1 Constant Voltage	20
+4.6.2 Constant Current	21
+APPENDIX	22
+CIRCUIT BOARD LAYOUTS	22
+Main Board	22
+Display Board	25
+
+
+1 Introduction
+Any engineer, technician or hobbyist need some form of power supply when designing or experimenting with electronic circuits. The power supply described in this document will cover a broad range of applications, and can also be used as a battery charger.
+
+The AVRpsu is a laboratory power supply with a single output of 0-25V, 0-2.5A. The output voltage and current limit is programmable with resolutions of 100mV and 10mA and can be adjusted either from the front panel controls, or remotely through the RS-232 port. The unit's firmware can also be updated through this port.
+
+The design is entirely linear, resulting in lower noise than switched designs. The very compact size is achieved through use of a highly integrated microcontroller, the Atmel ATmega8. It eliminates the need for external devices such as A/D- and D/A-converters, RAM, EPROM, or any clock circuits. This saves on design time, cost and space.
+
+
+
+
+
+
+
+
+2 Operation
+2.1 Overview
+The AVRpsu front panel consists of an alphanumeric display, two buttons, a rotary encoder and a pair of output terminals. The two buttons are labeled SET and OUTPUT, and are used for selecting which parameter to adjust and switching the output on or off, respectively. The rotary encoder is used for adjusting parameters like voltage and current etc.
+
+The OUTPUT key is very convenient for switching off the power while doing modifications to the circuit being powered from the power supply. Pressing and holding either of the buttons has special functions.
+
+2.2 Adjusting Parameters
+Parameters are adjusted via a set of menus, which are entered by pressing/holding the keys.
+
+The menu structure is illustrated in Figure 1.
+
+
+       Figure 1 - AVRpsu menu structure.
+
+
+
+2.2.1 Adjusting Voltage and Current and Switching Output On or Off
+From Normal Mode, press SET for a short time. The Volt digits start to flash and the voltage setpoint can be adjusted with the rotary encoder.
+
+A short press on SET will cause the Ampere digits to flash and the current limit can now be adjusted with the rotary encoder.
+
+A short press on SET will return AVRpsu to Normal Mode. The voltage and current setpoints are saved to EEPROM, and the cycle is repeated.
+
+The output can be toggled on or off with a short press on OUTPUT in any of the above modes.
+
+2.2.2 Adjusting Baudrate and Fan Trip-points
+From Normal Mode, press and hold SET. The Set Baudrate screen will appear in the display, and the actual Baudrate is flashing. This can now be adjusted with the rotary encoder. There is a choice of 10 Baudrates available: 300, 600, 1200, 2400, 4800, 9600, 19200, 38400, 57600 and 115200. The frame format, however, is fixed to 8 data bits, no parity and one stop bit.
+
+A short press on SET causes the Fan Start screen to appear in the display, with the Fan Start Temperature flashing. This can now be adjusted with the rotary encoder.
+
+A short press on SET causes the Fan Stop screen to appear in the display, with the Fan Stop Temperature flashing. This can now be adjusted with the rotary encoder.
+
+Another short press on SET will cause the Set Baudrate screen to appear again. The Baudrate and the Fan's trip points are saved to EEPROM, and the cycle is repeated.
+
+To exit to Normal Mode, press and hold SET.
+
+2.2.3 Viewing Output Power and Heatsink Temperature
+From Normal Mode, press and hold OUTPUT. The View Power screen appears in the display, and the power delivered to the load and the measured heatsink temperature is shown.
+
+Note that this mode can only be entered from Normal Mode and that no parameters can be adjusted in this mode.
+
+Short presses on OUTPUT have no effect in this mode.
+
+To return back to Normal Mode, press and hold OUTPUT.
+
+
+2.2.4 Display
+The display is a backlit, 16-character alphanumeric LCD module. The alphanumeric format is more flexible than traditional seven-segment types, allowing menu-based configuration and more complex information to be displayed. This also simplifies adding features to the AVRpsu, at a later point.
+
+Different parameters are displayed according to the selected mode, as shown in table 1.
+
+			       Table 1 - Display Modes.
+
+
+Flashing parameters can be adjusted by turning the rotary encoder. Adjusting a parameter will cause the flashing to stop for a little while, to simplify reading the parameter.
+
+In the modes Normal, Set Volt and Set Ampere, the output mode is shown in the center of the display. The output mode lets the user know whether the voltage or the current is being regulated (held constant), or if the output has been switched off. Normally, constant voltage (CV) is the preferred mode and constant current (CC) means the circuit draws more current than expected. This is, however, not always the case. When charging NiCd batteries, for example, constant current is the appropriate mode.
+
+Output mode is one of the following:
+CV	Constant Voltage
+CC	Constant Current
+OFF
+
+
+2.3 Parameter Storage
+All parameters are stored in non-volatile memory (EEPROM). This makes it convenient to continue working after the power has been switched off, eliminating the need for re-adjusting parameters. One exception is the output state, which is always OFF at power-up, to prevent accidental destruction of connected equipment.
+
+Parameters received through the RS-232 port will not overwrite those stored in EEPROM.
+
+2.4 RS-232 Port
+The RS-232 port can be used for remote control of the AVRpsu, including readback of measured values. The port is always activated and will always respond to received commands. The available commands are shown in table 2.
+
+  Table 2 - RS-232 port commands.
+Command
+Host Writes
+Host Reads
+
+ID
+Data
+Data
+
+Set Voltage
+"V"
+dd
+
+13d
+Set Current
+"A"
+dd
+
+13d
+Read Voltage
+"v"
+
+dd
+
+Read Current
+"a"
+
+dd
+
+Switch Output On
+"O"
+
+
+13d
+Switch Output Off
+"o"
+
+
+13d
+
+
+Unsupported commands are replied with a "?". 
+
+Data values "dd" for voltage and current are decimal numbers in the range 0 - 255 representing 0 - 25.0V or 0 - 2.50A. This applies for both writing and reading, and illegal values are ignored and replied with a "?". 
+
+When a parameter has been set from the RS-232 port, the icon       is shown in the display, between the voltage field and the output field. This indicates a parameter has been altered since the last setting from the front panel. The icon will be cleared when a parameter is adjusted from the front panel. 
+
+
+2.5 Firmware Upgrade
+The internal firmware of the AVRpsu can be upgraded through the RS-232 port. This is possible due to the boot loader support of the Atmega8, a feature enabling it to reprogram its own program memory. 
+
+The program memory (Flash) and EEPROM memory can be read and written through the RS-232 port, but no provisions are made for reading or writing Fuse Bits. This is done in order to prevent the user from rendering AVRpsu unusable by programming a Fuse Bit combination that do not work. One example of this is selecting a clock configuration that does not comply with the actual clock in AVRpsu.
+
+Two requirements must be met to be able to upgrade the firmware:
+
+* Boot Loader Mode must be entered.
+* A PC with programming software must be available.
+
+Holding SET while powering up the AVRpsu enters Boot Loader Mode. The display should read "Boot Loader Mode".
+
+The programming software must be compliant with Atmel Application Note AVR109. AVRpsu was designed and tested with AVRprog, but other compatible programs are available and should work, though they are not tested.
+
+3 Technical Description
+3.1 Overview
+AVRpsu is a fairly conventional design, with a few exceptions. The traditional potentiometers for adjusting voltage and current limit are replaced by a microcontroller, which generates the analogue voltages in place of the potentiometers. The microcontroller also takes care of measuring the voltage and current at the output, as well as controlling the relay in the Raw Power Supply, measuring the temperature at the heatsink, and controlling the cooling fans. In addition to all this it provides a RS-232 port, which can be used for remote control of the unit. 
+
+Figure 2 shows the AVRpsu block diagram.
+
+
+      Figure 2 - Block diagram.
+
+3.2 Analogue Circuit
+Figure 3 shows the schematic for the main board, containing all the analogue circuits. It is followed by a detailed description for each main portion of the circuit.
+
+
+Figure 3 - The main board schematic reveals a straightforward design.
+
+3.2.1 Raw Power Supply
+The Raw Power Supply provides the raw DC voltage to the Power Regulator and consists of a mains transformer (not in schematic), relay (RL1), rectifier (BR1) and smoothing capacitor (C4). This voltage contains a fairly large amount of ripple, but the Power Regulator suppresses this, so there is virtually no ripple voltage at the output. The voltage is divided in two ranges in order to minimize power dissipation in the output transistors. A mains transformer with dual 12V secondaries connected in series provide the two voltage ranges. A relay switches between the two secondary voltages, resulting in 12 or 24V AC to the rectifier. The relay is in turn controlled by the microcontroller, operating it according to the measured output voltage. Maximum life span of the relay is guaranteed by intelligent control, operating the relay only when necessary.
+
+Power dissipation is limited by the heatsink; the power regulator itself is capable of dissipating all power that can be generated under any condition. Due to this fact, the relay does not switch from 24V to 12V immediately when the output voltage drops below the threshold, but does so after a delay of a few seconds. On the up-going slope, however, the relay operates immediately. This is done to track the setpoint voltage when the user is increasing the voltage. 
+
+3.2.2 Power Regulator
+The power regulator is a classic analogue circuit built from operational amplifiers and transistors. It regulates both voltage and current at the output terminals to the values set by the user. All regulation is done in this circuit; hence the microcontroller is not part of the regulation loop. The microcontroller only provides the setvalues for the regulator, replacing the potentiometers often used in designs like this. Scaled signals for measuring output voltage and current are also provided by the regulator circuit.
+
+Output Stage
+The output stage consists of Darlington transistors T1 and T2 with emitter resistors R2 - R4 ensuring equal current distribution. PNP transistors are selected because they enable the voltage drop to be minimized. The transistor pair obtains their base current from the constant current source built from T4, D2, R14, D3, D4 and R9. The current source draws about 3mA of base current for the output transistors, which is sufficient to drive them into full conduction. However, op-amps IC2A and IC2D interfere with the circuit, forming part of the voltage and current regulator.
+
+If the output of one or both of the op-amps goes positive, the voltage at T4's emitter will rise, the base current for T1 and T2 will decrease, and the output voltage will decrease. This will happen if the output voltage is higher than the setpoint voltage, or if the output current is higher than the setpoint current.
+
+Voltage Regulator
+IC2A compares the actual output voltage with the setpoint voltage. The setpoint voltage is represented by the signal labeled VOLTAGE_SET in Figure 3. VOLTAGE_SET is a DC voltage in the range 0 - 5.12V, and is generated by the microcontroller. The actual output voltage is scaled to the same range by the voltage divider formed by R12, R15 and R32.
+
+The AD-converter signal is labeled VOLTAGE_READ in Figure 3 and has its own voltage divider formed by R13, R16 and R31. This is done in order to prevent erroneous voltage readings under some conditions. This occurs when the actual voltage is much lower than the setpoint voltage, because the op-amp will not allow large voltage differences between its inputs. The voltage at the non-inverting input of IC2A will then not reflect the output voltage, but will be pulled up by the op-amp.
+
+The lower end of R32 could have been connected to ground, but then the voltage regulator would not have compensated for the voltage drop across the current sense resistor R40 - R49. IC2B ensures that this voltage drop is compensated for by lowering the lower end of R32 to a voltage more negative than ground. This fools the voltage regulator to believe the output voltage is lower than it actually is. This portion of the circuit is borrowed from a design featured in Allt om Elektronik.
+
+Current Regulator
+IC2D compares the actual output current with the setpoint current, represented by the signal labeled CURRENT_SET in Figure 3. CURRENT_SET is a DC voltage in the range 0 - 5.12V, and is generated by the microcontroller. The actual current is represented by a voltage in the same range at the output of IC2C. This signal is simply the voltage across the 0.1? 6W current sense resistor (R40 - R49) multiplied by 20. This signal is also fed to the AD-converter and is labeled CURRENT_READ in Figure 3.
+
+3.2.3 Thermal Management
+A Dallas 18S20 temperature sensor connected to J2 and two fans connected to J5 provide for thermal management. The temperature sensor is fixed to the heatsink close to the output transistor pair. It has a 1-wire digital interface, occupying only one pin on the microcontroller. The heatsink temperature is monitored continuously and the cooling fans are controlled according to trip-points defined by the user.
+
+If the heatsink should reach unacceptable temperatures, however, an overtemperature mode is entered. In this mode the output is switched off, the fans are started and a message scrolls through the display telling what has happened. When the unit has cooled down, normal operating will be resumed. The output will remain in the off state, however.
+
+3.2.4 Auxiliary Circuits
+The rest of the main board schematics consist mainly of voltage regulators and interconnections. 
+
+IC1 is an adjustable voltage regulator, LM317, which provides the +5.12V for the digital circuits. This voltage is adjusted by the potentiometer R8, which thereby set the gain of both voltage and current regulator loops.
+
+IC3 is a fixed voltage regulator, 7812, which provides +12V for the relay, fans, op-amps and bias for the output transistors.
+
+IC4 is a voltage converter, which converts the +12V to -12V. Used for the op-amps.
+
+T3 is the relay driver and T5 is the driver for the fans.
+
+R36 and R39 are the offset adjustment potentiometers for the current and voltage regulators, respectively.
+
+3.3 Digital Circuit
+Figure 4 shows the schematic for the display board, containing all digital circuitry.
+
+
+Figure 4 - Display board schematics. Simplicity seems to be the rule here.
+
+
+R6 is the contrast adjustment potentiometer for the LCD module.
+
+D1 and D2 are LEDs for illuminating the front panel (not implemented on the prototype).
+
+3.3.1 Microcontroller
+IC1 is an Atmel ATmega8 and is the heart of the system, controlling it all. Thanks to all its integrated peripherals, very few external components are needed.
+
+Supply decoupling for the microcontroller is provided for by C2 and C18. C2 is a Murata filter designed to filter supply lines of digital circuits. It prevents switching noise from the microcontroller from entering the sensitive AD-converter supply.
+
+The ISP (In-System Programming) connector was used during development, for loading the program into the microcontroller. This is necessary the first time, as no Boot Loader is present when the device is new. The ISP is also necessary for programming Fuses and for experimenting with the Boot Loader.
+AD-Converter
+The internal 10-bit A/D-converter has its own supply pin, AVCC, which is connected to the +5V through a LC-filter consisting of L1 and C1. This arrangement assures clean power to the sensitive circuitry of the AD-converter.
+
+The AD-converter measures the voltage and current at the output, and displays the values on the display. The signals V_READ and C_READ are fed to the AD-converter through separate low-pass filters formed by R4, C4, R5 and C5. Only 8 bits resolution is used in this design, using the eight most significant bits from the AD-conversion result. The next significant bit is used for rounding, however. If the next significant bit is set, the result is rounded up, otherwise not. This method ensures correct rounding of the result, but the logic behind can be difficult to realize at first. 
+
+Consider the following example: An AD-converter with a range of 0 - 100 is available but only the two most significant digits are used in the application. The range will then be 0 - 10, ignoring the least significant (rightmost) digit. The result will then be 01 for all "real" results in the range 0 - 19. This means 1.9 is rounded down to 1, which is clearly wrong. Now, if the last digit is taken into account this can be avoided. Rounding the result up for all values of the last digit equal to or greater than 5, will correct the result.
+
+PWM
+Timer1 is used in PWM mode for generating setvalue signals.  This timer has two PWM channels and these signals are fed to the power regulator through separate RC-filters, resulting in two DC voltages. These voltages are proportional to the values in their respective Output Compare Registers. This functionality realizes two DAC's with the lowest possible pin usage and component count and since the signals are generated entirely in hardware, program flow is not affected. One drawback is slow response in change of settings.
+
+RS-232 Port
+The internal USART provides a RS-232 port, enabling settings to be adjusted from a computer, and measurements to be fed to the computer. It is used in the asynchronous mode, as per the RS-232 standard.
+
+The microcontroller's own program can also be updated through the serial port, see section 2.5 Firmware Upgrade on page 8. This enables the user to add functions and features to the unit whenever desired.
+
+
+3.3.2 Support Circuits
+Display
+The display is a Seiko 16X1 LCD module with LED backlight and built-in controller (Samsung KS0066). The alphanumeric format gives a flexible means of displaying information, not limiting the displayable information to just voltage and current but also serial port parameters, temperature etc. LCD modules like this are also cheaper than a load of LED digits and a driver circuit. 
+
+The display module has an 8-bit or 4-bit parallel interface that is connected to the microcontroller via a 74HC164 shift register (IC2) to save port pins. The Read/Write signal is permanently connected to ground, as no reading from the display is necessary. It is common practice to read the display's Busy Flag after each command, and make sure the module is ready before sending any data or command. This is, however, not entirely necessary as long as the timing requirements are met with good margin.
+
+Keys
+OUTPUT (S1) and SET (S3) are connected directly to the microcontroller and enable the user to switch the output on and off as well as entering menus for adjusting parameters. The microcontroller has selectable pull-up resistors for each pin, eliminating the need for external resistors.
+
+Rotary Encoder
+The Rotary encoder (S2) is connected directly to the microcontroller. It has 4 electrical states, which is sequenced when rotating, the order of sequencing determining the direction of rotation. These states are stored in a 4-byte table in program memory and are used for decoding the rotary encoder. One 4-state cycle corresponds to two mechanical indents and  revolution on the encoder.
+
+Initially the encoder pins are read and the index to the corresponding table element is stored in a global variable called rot_prev. Next time around, the pins are read again, the index is found and compared to the previously stored one. If they are equal, no rotation has occurred. If they are not equal, two if statements determine which direction the encoder has rotated. If all 4 transactions between states were to result in decoded rotation, that would result in 2 digital steps per mechanical indent. This is not desirable; so only two transactions per direction were selected to result in decoded rotation.
+
+A simpler method is to wait for an edge on one of the signals, and then check the level at the other signal to determine the direction. This has one major drawback, however: The program will hang in that function until the edge is detected. That is not at all acceptable in all applications.
+
+Level Converter
+IC3 is a Maxim MAX202 and provides the level conversion for the RS-232 port. This is an upgrade from the well-known MAX232, requiring just 100nF capacitors for the charge pump voltage converter. It converts the 0-5V signals at the microcontroller pins to +/-12V at the RS-232 port, in both directions.
+
+4 Performance
+This chapter contains measurements and performance analysis of the AVRpsu prototype. All measurements were made with an Agilent 54622D oscilloscope. The measurements were made in a noisy lab, as can be seen on Figure 5.
+All measurements involving low-voltage levels show this noise superimposed on the output voltages. It is important to realize that this noise does not arise in the AVRpsu, but rather the environment that the measurements were made in.
+
+4.1 Summary
+
+
+
+
+
+
+
+
+
+4.2 Noise
+Ideally, the output voltage is completely clean under all conditions. In the real world, however, noise and ripple is superimposed on the wanted voltage. Noise is measured with no load connected.
+
+Figure 7 shows the noise on the output voltage with no load.
+
+If the background noise is deducted, it can be seen that the noise level is very low.
+
+This measurement was repeated at home, with my Kenwood CS-5130 analogue scope. That revealed about 1.5mVpeak-peak of noise and no spikes around 90kHz.	 100Hz spikes, however, were present.
+
+4.3 Ripple
+Ripple is variations in the output voltage or current and is caused by the rectifier charge pulses. These pulses charge the reservoir capacitor and are high current but short in duration. 
+4.3.1 Ripple Voltage
+Ripple Voltage is measured in Constant Voltage mode, with a load resistor resulting in a current of 2.49A. Figure 8 shows the output voltage under these conditions.
+
+Noise in the lab is again suspected to be significant. A measurement made at home with my Kenwood CS-5130 scope indicated a ripple voltage of 4.8mVpeak-peak with very little high-frequency components. Seems to match the darkest portion of the trace in Figure 8.
+
+
+
+4.3.2 Ripple Current
+Ripple Current is measured as a voltage across a load resistor and calculated using the following formula:
+	
+
+Measurements are performed in Constant Current mode, with a load resistor resulting in a voltage of 24.9V.
+
+According to Figure 9, the ripple current is 2.48mARMS. This is about 0.1% of the total current, a totally acceptable figure.
+
+
+
+
+4.4 Output Switching
+The output does not change from zero volts to the desired voltage instantaneously when pressing the OUTPUT key. This switching takes time, and the voltage change in an exponential slope.
+4.4.1 From OFF to ON
+Figure 10 shows the output voltage slope when switching from off to on.
+
+The slow response is a result of the method used for switching the output on and off, which is done by writing zero to the PWM registers, and the delay comes from the time constant in the RC-filters for the PWM signals.
+
+
+
+
+
+
+
+4.4.2 From ON to OFF
+Figure 11 shows the output voltage slope when switching from on to off.
+
+Again, the slow response is caused by the RC-filters for the PWM signals.
+
+
+
+
+
+
+4.5 Output Resistance
+Output Resistance is defined as the virtual resistance in series with the output of the power supply. This can be seen by the fact that the voltage is not constant for different load currents.
+
+ The output resistance is measured using the method illustrated in Figure 12. A load resistor is switched on and off by a function generator and a power FET, causing the load to be stepped from zero to a known current at a fixed frequency. An oscilloscope is connected to the power supply output and the ground end of the resistor. The output resistance is calculated from the following formula:
+
+
+       
+
+
+
+The settings and load resistor result in a current of 1.00A, and Figure 13 shows a differential voltage of 12.5mV. This equates to an output resistance of 12.5m?, which is a bit on the high side.
+
+
+
+
+
+
+
+
+
+
+
+
+4.6 Transient Response
+Transient Response is defined as the time the power supply needs to get back on track after a change in load.
+
+4.6.1 Constant Voltage
+The measurement setup is the same as for output resistance measurement, as shown in Figure 14. The only difference is the oscilloscope settings regarding timebase and vertical amplifier.
+
+
+
+
+The negative edge on the Channel 2 trace indicates the load being switched on. The load current then steps from zero to 1.00A. The Transient Response time is about 35µs.
+
+
+4.6.2 Constant Current
+In Constant Current mode, one resistor is permanently connected to the output, while another is switched on and off with a power FET. This way, the output current is changed from one level to another at a fixed frequency. AVRpsu is in Constant Current mode during both these phases.
+
+Figure 17 gives an overview of what is going on. Channel 2 represents the extra load resistor being switched on and off, while channel 1 shows the output voltage changing keeping the total current constant.
+
+
+
+
+
+
+Figure 18 shows in detail the output slope when the current changes from a low level to a high level. This is the most interesting case, as it represents AVRpsu preventing the load current from growing bigger than the user-defined level. AVRpsu's current regulator is slow. When a load resistor suddenly decreases, AVRpsu does not do anything for about 3.3ms, and then it uses about 3ms to get on track.
+
+APPENDIX
+Circuit Board Layouts
+Main Board
+
+
+
+Figure 19 - Main board component placement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 20 - Main board top layer.
+
+
+
+
+
+
+
+
+
+
+Figure 21 - Main board bottom layer.
+
+
+
+
+
+
+
+
+Display Board
+
+
+
+
+
+
+Figure 22 - Display board top layer component placement. Front view.
+
+
+
+
+
+
+
+
+
+
+
+Figure 23 - Display board bottom layer component placement. Front view.
+
+
+
+
+
+
+
+
+
+Figure 24 - Display board top layer. Front view.
+
+
+
+
+
+
+
+
+
+
+
+Figure 25 - Display board bottom layer. Front view.
+
+
+
+
+
+27
+
+
+

@@ -1,0 +1,20 @@
+Qty Value      Device	  Parts									
+2	       HH	  S1, S3								
+12  0.1uF      C-EUC0805  C1, C2, C3, C4, C5, C6, C11, C12, C13, C14, C15, C16			
+1   1k	       23B	  R6									
+2   1k	       R-EU_R0805 R4, R5								
+1   3.3k       R-EU_R0805 R7									
+1   9.1R       R-EU_R0805 R8									
+4   10k	       R-EU_R0805 R1, R2, R3, R10							
+2   10uF 6V    C-EUC3216  C7, C8								
+1   11.0592MHz SM49	  Q1									
+2   12pF       C-EUC0805  C9, C10								
+1   16x1 LCD   1X16_01	  J1									
+1   74HC164D   74HC164D	  IC2									
+1   100uH      L-EULQH4N  L1									
+1   EC16B      EC16B	  S2									
+1   ISP	       MA03-2	  SV1									
+1   MAX202CSE  MAX202CSE  IC3									
+1   MEGA8-AC   MEGA8-AC	  IC1									
+11  SMD	       SMD	  +5V, CV, C_READ, C_SET, GND, OFF, RELAY, SER_IN,
+SER_OUT, V_READ, V_SET
